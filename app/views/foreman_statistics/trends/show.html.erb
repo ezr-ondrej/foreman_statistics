@@ -4,8 +4,8 @@
 <div class="row">
   <div class="stats-well col-md-12">
     <h4 class="ca"><%= "#{trend_title(@trend)}" %></h4>
-    <h6 class="ca"><%= n_("last %s day", "last %s days", range) % range %></h6>
-    <%= flot_chart 'trend_graph','' ,_('Number of Hosts') , chart_data(@trend, range.days.ago), :class=>'statistics-chart stack', :legend => 'external' %>
+    <h6 class="ca"><%= n_("last %s day", "last %s days", trends_range) % trends_range %></h6>
+    <%= flot_chart 'trend_graph','' ,_('Number of Hosts') , chart_data(@trend, trends_range.days.ago), :class=>'statistics-chart stack', :legend => 'external' %>
   </div>
 </div>
 <div id="legendContainer"></div>
@@ -23,3 +23,13 @@
     </tbody>
   <% end %>
 </table>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="stats-well">
+      <h4 class="ca"><%= "#{trend_title(@trend)}" %></h4>
+      <h6 class="ca"><%= n_("last %s day", "last %s days", trends_range) % trends_range %></h6>
+      <%= react_component('AreaChart', yAxisLabel: _('Number of Hosts'), data: trend_chart_data(@trend, trends_range.days.ago)) %>
+    </div>
+  </div>
+</div>
